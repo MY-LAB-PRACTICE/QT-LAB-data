@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: configure
+  labels:
+    app: ConfigMap-mp
+data :
+  MYSQL_ROOT_PASSWORD: root
+  MYSQL_DATABASE: mysql
+  MYSQL_USER: sri
+  MYSQL_PASSWORD: root
+  MY_NAME: sridhar
+
+        

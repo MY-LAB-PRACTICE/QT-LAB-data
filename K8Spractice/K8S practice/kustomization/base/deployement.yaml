@@ -1,0 +1,33 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sri
+  labels:
+    app: dashboardservice
+spec:
+  minReadySeconds: 3
+  replicas: 4
+  selector:
+    matchLabels:
+      app: dashboardservice
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%   
+    type: RollingUpdate
+  template:
+    metadata:
+      name: sri
+      labels:
+        app: dashboardservice    
+    spec:
+      containers:
+        - name: sri
+          image: shaikkhajaibrahim/dashboardservice:1.0.0
+          ports:
+            - containerPort: 80 
+
+
+
+

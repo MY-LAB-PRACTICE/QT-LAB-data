@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: init-container
+spec:
+  containers:
+    - name: nginx
+      image: nginx:latest
+      ports:
+        - containerPort: 80
+  initContainers:
+    - name: delay
+      image: alpine
+      command:
+        - sleep
+        - 15s
+    - name: tomcat
+      image: tomcat:9.0.75-jdk8-corretto-al2
+      ports:
+        - containerPort: 80    
+    
+    

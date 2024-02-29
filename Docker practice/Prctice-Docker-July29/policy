@@ -1,0 +1,19 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "*",
+            "Resource": [ 
+                "arn:aws:s3:::*",
+                "arn:aws:ec2::us-east-1*"
+        ]      
+         }
+         
+        ]
+}     
+
+
+
+
+aws ec2 terminate-instances --instance-ids i-05eb167c04298a88c

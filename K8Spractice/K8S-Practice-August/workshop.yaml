@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: petclinic
+  labels: petclinic
+spec:
+  minReadySeconds: 4
+  replicas: 4
+  selector: 
+    matchLabels: petclinic
+  strategy:
+    rollingUpdate:
+      maxSurge: 50%
+      maxUnavailable: 25%
+  template:
+    metadata:
+      name: petclinic
+      labels: petclinic
+    spec:
+      containers:
+        image: 
+        ports:
+          - containerPort:            
+    

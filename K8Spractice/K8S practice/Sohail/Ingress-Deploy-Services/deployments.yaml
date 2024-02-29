@@ -1,0 +1,116 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: identity-deploy
+  labels:
+    deploy: identity
+spec:
+  minReadySeconds: 5
+  replicas: 3
+  selector:
+    matchLabels:
+      app: identity
+  strategy:
+    type: RollingUpdate
+    rollingUpdate: 
+      maxSurge: 25%
+      maxUnavailable: 25%
+  template:
+    metadata: 
+      name: identity-pod
+      labels:
+        app: identity
+    spec:
+      containers:
+        - name: identity
+          image: syedsohail321/identity-svc:1.0.0
+          ports:
+            - containerPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order-deploy
+  labels:
+    deploy: order
+spec:
+  minReadySeconds: 5
+  replicas: 3
+  selector:
+    matchLabels:
+      app: order
+  strategy:
+    type: RollingUpdate
+    rollingUpdate: 
+      maxSurge: 25%
+      maxUnavailable: 25%
+  template:
+    metadata: 
+      name: order-pod
+      labels:
+        app: order
+    spec:
+      containers:
+        - name: order
+          image: syedsohail321/order-svc:1.0.0
+          ports:
+            - containerPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: catalog-deploy
+  labels:
+    deploy: catalog
+spec:
+  minReadySeconds: 5
+  replicas: 3
+  selector:
+    matchLabels:
+      app: catalog
+  strategy:
+    type: RollingUpdate
+    rollingUpdate: 
+      maxSurge: 25%
+      maxUnavailable: 25%
+  template:
+    metadata: 
+      name: catalog-pod
+      labels:
+        app: catalog
+    spec:
+      containers:
+        - name: catalog
+          image: syedsohail321/catalog-svc:1.0.0
+          ports:
+            - containerPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: basket-deploy
+  labels:
+    deploy: basket
+spec:
+  minReadySeconds: 5
+  replicas: 3
+  selector:
+    matchLabels:
+      app: basket
+  strategy:
+    type: RollingUpdate
+    rollingUpdate: 
+      maxSurge: 25%
+      maxUnavailable: 25%
+  template:
+    metadata: 
+      name: basket-pod
+      labels:
+        app: basket
+    spec:
+      containers:
+        - name: basket
+          image: syedsohail321/basket-svc:1.0.0
+          ports:
+            - containerPort: 80

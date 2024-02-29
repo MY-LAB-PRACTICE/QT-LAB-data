@@ -1,0 +1,104 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata: 
+  name: mysql
+spec:
+  minReadySeconds: 4
+  replicas: 4
+  selector:
+    matchLabels:
+      db: mysql
+  template:
+    metadata: 
+      name: mysql
+      labels:
+        db: mysql  
+    spec:
+      containers:
+        - name: mysql
+          image: mysql:8.0
+          ports: 
+            - containerPort: 3306
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: manuroot
+            - name: MYSQL_USER
+              value: gmanohar
+            - name: MYSQL_PASSWORD 
+              value: manu1234
+            - name: MYSQL_DATABASE 
+              value: students  
+          volumeMounts:
+            - mountPath: /var/lib/mysql
+              name: mysql-pvc
+              readOnly: false
+      # volumes:
+      #   - name: mysql-pvc
+      #     persistentVolumeClaim:
+      #       claimName: mysql-pvc
+      #       readOnly: false    
+  volumeClaimTemplates:
+    - metadata:
+        name: mysql-pvc 
+      spec:  
+        accessModes:
+          - ReadWriteOnce
+        # selector:
+        #   matchLabels:
+        #     db: mysql
+        volumeMode: Filesystem
+        resources:
+          requests: 
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+---
+apiVersion: v1
+kind: Service
+metadata: 
+  name: mysql
+  labels: 
+    db : mysql
+spec:
+  type: ClusterIP
+  clusterIP: None
+  ports:
+    - name: mysql
+      port: 80
+      protocol: TCP
+      targetPort: 3306
+  selector:
+    db: mysql    
+
+
+
+
+
+             ---------------
+
+## DECSECOPS only for containers>>>
+             /identity---------dought
+             creating end points for individual microservices...use one endpoint to control
+            attack serface and recter
+            penetration test--->kali linux
+            scan code
+            container
+            k8s clutser--->kubebench
+            vera code
+            scnaing container images
+            ACR
+            ECR
+            JFROG
+            CVE--> Common vulnarable Exposer
+            SAST-->Static--Code checking--->stopped application checking---ex:veracode
+            DAST--> DYNAMIC--> runnig application checking
+
+
+            Software composition analysis---> scaning dependencies of our application -->ex: sonar kube analysis
+
+
+           
+
+          

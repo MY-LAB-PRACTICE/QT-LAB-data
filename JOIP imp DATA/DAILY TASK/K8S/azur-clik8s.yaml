@@ -1,0 +1,57 @@
+1  curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+    2  sudo apt-get update
+    3  sudo apt-get install ca-certificates curl apt-transport-https lsb-release gnupg
+    4  sudo mkdir -p /etc/apt/keyrings
+    5  curl -sLS https://packages.microsoft.com/keys/microsoft.asc |     gpg --dearmor |     sudo tee /etc/apt/keyrings/microsoft.gpg > /dev/null
+    6  sudo chmod go+r /etc/apt/keyrings/microsoft.gpg
+    7  AZ_REPO=$(lsb_release -cs)
+    8  echo "deb [arch=`dpkg --print-architecture` signed-by=/etc/apt/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/azure-cli/ $AZ_REPO main" |     sudo tee /etc/apt/sources.list.d/azure-cli.list
+    9  sudo apt-get update
+   10  sudo apt-get install azure-cli
+   11  az -version
+   12  az --version
+   13  az login
+   14  az group create --name myResourceGroup --location eastus
+   15  az aks create -g myResourceGroup -n myAKSCluster --enable-managed-identity --node-count 1 --enable-addons monitoring --enable-msi-auth-for-monitoring  --generate-ssh-keys
+   16  kubectl get nodes
+   17  az aks install-cli
+   18  sudo az aks install-cli
+   19  sudo  az aks get-credentials --resource-group myResourceGroup --name myAKSCluster
+   20  az login
+   21  sudo  az aks get-credentials --resource-group myResourceGroup --name myAKSCluster
+   22  az aks get-credentials --resource-group myResourceGroup --name myAKSCluster
+   23  vi httpd.yaml
+   24  kubectl apply -f httpd.yaml
+   25  kubectl get nodes
+   26  kubectl get rs
+   27  kubectl describe https-rs
+   28  kubectl describe rs https-rs
+   29  kubectl get po
+   30  kubectl describe pods https-rs-rshbz
+   31  kubectl get endpoints
+   32  kubectl get svc
+   33  kubectl describe svc httpd-svc
+   34  kubectl describe svc httpd-svc -o w
+   35  vi jenkins.yaml
+   36  kubectl apply -f jenkins.yaml
+   37  kubectl get nodes
+   38  kubectl get po
+   39  kubectl get rs
+   40  kubectl get svc
+   41  vi jenkins.yaml
+   42  kubectl delete svc httpd-svc
+   43  kubectl delete svc jenkins-svc
+   44  kubectl get rs
+   45  kubectl delete rs https-rs
+   46  kubectl delete rs jenkins-rs
+   47  kubectl get rs
+   48  kubectl get po
+   49  vi jenkins1.yaml
+   50  kubectl apply -f jenkins1.yaml
+   51  kubectl get po
+   52  kubectl get rs
+   53  kubectl get svc
+   54  vi jenkins1.yaml
+   55  kubectl describe svc jenkins-svc
+   56  kubectl get nodes
+   57  history

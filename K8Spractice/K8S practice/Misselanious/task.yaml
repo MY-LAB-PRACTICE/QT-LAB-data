@@ -1,0 +1,178 @@
+### 2) Writing the Manifest Files for Spc App
+------------------------------------------------------------
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: Spc-pod
+  labels:
+    app: spc
+spc:
+  containers:
+    - name: spc-container
+      image: sridhar231/spc:3.0.0
+      ports:
+        containerPort: 8080
+
+
+### 2) Writing the Manifest Files for nopCommerce App
+-----------------------------------------------------------
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: Nop
+  labels:
+    app: nop
+spc:
+  containers:
+    - name: nop-container
+      image: sridhar231/nop:4.60.2
+      ports:
+        containerPort: 5000
+    
+
+### 3) Writing the Manifest Files for gameoflife App
+-----------------------------------------------------------
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: Gol-pod
+  labels:
+    app: gol
+spc:
+  containers:
+    - name: gol-container
+      image: sridhar231/nop::1.0.0
+      ports:
+        containerPort: 8080
+
+
+### 4) Creating the Job
+--------------------------
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: job-alpine 
+spec:
+  backoffLimit: 5
+  template:
+    metadata:
+      name: alpine-pod
+    spec:
+      containers:
+        - name: alpine
+          image: alpine
+          command:
+            - sleep
+            - 3s
+
+
+
+### 4) Creating the CronJob
+-----------------------------
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: cronjob-alpine
+spec:
+  schedule: '* * * * *' 
+  jobTemplate:
+    metadata:
+      name: livedata
+    spec:
+      template:
+        metadata:
+          name: alpine-pod
+        spec:
+          containers:
+            - name: alpine
+              image: alpine:2.0
+              command:
+                - sleep
+                - 10s
+
+
+
+### 5)Creating the ReplicaSet
+--------------------------
+---
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: jenkins-rs
+spec:
+  minReadySeconds: 3
+  replicas: 3
+  selector:
+    labels:
+      app: jenkins
+  template:
+    metadata:
+      name: jenkins-pod
+      labels:
+        app: jenkins
+    spec:
+      containers:
+        - name: jenkins
+          image: jenkins/jenkins
+          ports:
+            containerPort: 8080
+
+
+
+### 6) Writing the LABELS and Selecting the LABELS using selector concept
+-------------------------------------------------------------------------
+---
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: jenkins-rs
+spec:
+  minReadySeconds: 3
+  replicas: 3
+  selector:
+    labels:
+      app: jenkins
+  template:
+    metadata:
+      name: jenkins-pod
+      labels:
+        app: jenkins
+        environment: dev
+    spec:
+      containers:
+        - name: jenkins
+          image: jenkins/jenkins
+          ports:
+            containerPort: 8080
+  
+
+
+### 7)Write a manifest to create nginx replication controller with 3 pods
+-----------------------------------------------------------------------
+---
+apiVersion: core/v1
+kind: ReplicationController
+metadata:
+  name: Rep-Cont-nginx
+spec:
+  minReadySeconds: 5
+  replicas: 3
+  selector:
+    labels:
+      app: nginx
+  template:
+    metadata:
+      name: nginx-pod
+      labels:
+        app: nginx
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.23
+          ports:
+            - containerPort: 80

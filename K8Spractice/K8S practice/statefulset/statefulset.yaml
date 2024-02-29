@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: nginx-sts
+  labels:
+    app: nginx
+spec:
+  minReadySeconds: 5
+  replicas: 5
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      name: nginx
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        volumeMounts:
+          mountPath:
+          name: nginx
+    volumeClaimTemplates:
+    - metadata:
+        app: nginx
+      spec:
+        - accessModes : Readonly
+          resources:
+            - limits: 10 
+              requests: 10
+
+
+
+
+

@@ -1,0 +1,11 @@
+---
+resources:
+  - ../../base
+
+namespace: dev
+replicas:
+  - name: app-deploy
+    count: 2
+labels:
+  - pairs:
+      app: dev-deploy

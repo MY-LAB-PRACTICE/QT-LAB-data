@@ -1,0 +1,11 @@
+---
+resources:
+  - ../../base
+
+namespace: qa
+replicas:
+  - name: app-deploy
+    count: 4
+labels:
+  - pairs:
+      app: qa-deploy

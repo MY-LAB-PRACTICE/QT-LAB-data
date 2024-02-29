@@ -1,0 +1,29 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: nginx-job
+  labels:
+    app: nginx
+spec:
+  template:
+    metadata:
+      name: nginx
+      labels:
+        app: nginx
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: nginx
+        image: nginx:latest
+        ports: 
+          - containerPort: 80
+                
+          
+
+
+#  restartPolicy: OnFailure or Never        
+
+          
+
+
+

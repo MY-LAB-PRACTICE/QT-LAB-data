@@ -1,0 +1,15 @@
+---
+resources:
+  - ../../base
+
+namespace: dev
+replicas:
+  - name: sri
+    count: 8
+images:
+  - name : sri
+    newName: phpmyadmin
+    newTag: "latest"  
+
+
+

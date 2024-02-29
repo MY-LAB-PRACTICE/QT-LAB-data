@@ -1,0 +1,27 @@
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: nginx-cronjob
+  labels: 
+    app: nginx
+spec:
+  schedule: '* * * * *'
+  jobTemplate:
+    metadata:
+      name: nginx
+      labels: 
+        app: nginx
+    spec:
+      template:
+        metadata:
+          name: nginx-pod
+          labels:
+            app: nginx
+        spec:
+          restartPolicy: Never
+          containers:
+            - name: nginx
+              image: nginx:latest
+              ports:
+                - containerPort : 80             

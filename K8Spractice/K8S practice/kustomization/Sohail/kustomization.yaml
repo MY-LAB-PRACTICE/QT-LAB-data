@@ -1,0 +1,15 @@
+---
+resources:
+  - ./kustomize/base
+
+namespace: uat
+replicas:
+  - name: app-deploy
+    count: 3
+labels:
+  - pairs:
+      app: uat-deploy
+images:
+- name: nginx
+  newName: syedsohail321/jenkins
+  newTag: "1.0"

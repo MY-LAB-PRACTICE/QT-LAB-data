@@ -1,0 +1,26 @@
+---
+version:"7.0"
+services:
+  nop:
+    build:
+    context: .
+    dockerfile: Dockerfile 
+  networks:
+    -my_bridge
+  ports:
+   -target:8080
+    published:8080
+  networks:
+    
+  environments:
+    -MYSQL_ROOT_PASSWORD=sridhar 
+     MYSQL_DATABASE=employees 
+     MYSQL_USER=qtdevops 
+     MYSQL_PASSWORD=rootroot     
+  depends_on:
+    -mysql
+  image: mysql:5.6
+ volumes:
+   -type: volume
+    source: employees
+    target: /var/lib/mysql      
